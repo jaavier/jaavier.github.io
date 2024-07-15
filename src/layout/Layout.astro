@@ -24,7 +24,7 @@ interface Props {
   lang?: string;
 }
 
-const { lang = navigator.language.split("-")[0] } = Astro.props;
+const { lang = "en" } = Astro.props;
 ---
 
 <html lang={lang}>
