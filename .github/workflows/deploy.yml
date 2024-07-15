@@ -37,6 +37,6 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "javierguaja-jaaviergith-13"
-          entrypoint: "server/entry.mjs"
+          project: "jaavier"
+          entrypoint: "dist"
           root: "dist"
