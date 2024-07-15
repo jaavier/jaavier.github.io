@@ -1,0 +1,26 @@
+---
+import { Icon } from "astro-icon/components";
+interface Props {
+  features?: string[];
+}
+
+const { features } = Astro.props;
+---
+
+<div class="flex-1">
+  <div class="font-bold text-xl flex items-center w-full">
+    <div class="font-fredoka font-light flex-1">
+      {
+        features &&
+          features.map((feature: string) => (
+            <div class="font-light flex gap-4 mb-3">
+              <div>
+                <Icon name="mdi:check" class="mt-1" />
+              </div>
+              <div>{feature}</div>
+            </div>
+          ))
+      }
+    </div>
+  </div>
+</div>

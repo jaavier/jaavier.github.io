@@ -1,0 +1,16 @@
+---
+interface Props {
+  content: string;
+  url: string;
+}
+
+const { content, url } = Astro.props;
+---
+
+<div class="transition-colors duration-600">
+  <div class="font-fredoka font-light text-balance selection:flex-1 text-xl">
+    <div class="flex" set:html={content}>
+      <!-- {content && content} -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+---
+interface Props {
+  text: string;
+  href: string;
+  icon?: string;
+  noId?: boolean;
+}
+const { href, icon, noId, text } = Astro.props;
+---
+
+<a href={href} target="_blank">
+  <!-- <div
+    class="flex items-center gap-3 hover:bg-orange-600 hover:text-white py-2 lg:py-3 rounded-full lg:px-5 px-3"
+  > -->
+  <div
+    class="flex items-center gap-3 border-2 border-transparent hover:border-orange-600 hover:text-white py-2 lg:py-3 rounded-full lg:px-5 px-3 transition-colors duration-600 font-light"
+  >
+    <div
+      class="px-3 py-1 hover:border-0 h-7 w-7"
+      style={`background-image: url(/assets/${icon}.svg); background-position: center center; background-repeat: no-repeat`}
+    >
+    </div>
+    {
+      noId ? (
+        <span class="block">{text}</span>
+      ) : (
+        <span class="block" id={`social-text`}>
+          {text}
+        </span>
+      )
+    }
+  </div>
+</a>

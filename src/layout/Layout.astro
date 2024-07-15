@@ -1,0 +1,105 @@
+---
+import "@fontsource-variable/fredoka";
+import "@fontsource/ibm-plex-sans-arabic";
+import Navbar from "../components/Navbar.astro";
+import Card from "../components/Card.astro";
+import profile from "../profile";
+import { ViewTransitions } from "astro:transitions";
+import Button from "../components/Button.astro";
+import ProjectFinder from "../components/ProjectFinder";
+
+const classes = [
+  "sm:px-5 md:px-0 lg:px-10",
+  "min-h-screen",
+  "bg-black",
+  "text-white",
+  "font-extralight",
+  "flex",
+  "flex-col",
+  "items-center",
+  "justify-center",
+];
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = navigator.language.split("-")[0] } = Astro.props;
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Javier Guajardo</title>
+    <ViewTransitions />
+  </head>
+  <body>
+    <div class:list={classes}>
+      <div class="max-w-6xl mx-auto lg:px-0 px-10 pb-20">
+        <Navbar lang={lang} showLangs={true} />
+        <div class="mt-32 flex">
+          <div
+            class="space-y-4 lg:w-3/4 font-fredoka text-lg text-justify leading-6 pb-5 lg:block flex flex-col items-center"
+          >
+            <div class="h-36 w-36 lg:hidden">
+              <img src="/assets/me.png" class="rounded-full" />
+            </div>
+            <div>
+              {profile.resume[lang]}
+            </div>
+          </div>
+        </div>
+        <div
+          class="font-light lg:text-xl text-sm flex gap-3 lg:justify-start justify-center"
+          id="social"
+        >
+          <Button
+            href="https://github.com/jaavier"
+            text="GitHub"
+            icon="github"
+            noId={true}
+          />
+          <Button
+            href="https://www.linkedin.com/in/javier-gj/"
+            text="LinkedIn"
+            icon="linkedin"
+            noId={true}
+          />
+        </div>
+        <ProjectFinder client:visible />
+        <div class="mt-5 text-3xl font-fredoka">Frontend</div>
+        <div
+          class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mt-5 gap-5 pb-5"
+        >
+          <Card title="TypeScript" lang={lang} path="typescript" />
+          <Card title="React.js" lang={lang} path="reactjs" />
+          <Card title="TailwindCSS" lang={lang} path="tailwindcss" />
+          <Card title="HTML5" lang={lang} path="html5" />
+          <Card title="CSS3" lang={lang} path="css3" />
+          <Card title="Astro" lang={lang} path="astro" />
+        </div>
+        <!-- <div class="mt-5 text-3xl border-t pt-8 font-fredoka">Backend</div> -->
+        <div class="mt-5 text-3xl font-fredoka">Backend</div>
+        <div
+          class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mt-5 gap-5"
+        >
+          <Card title="Node.js" lang={lang} path="nodejs" />
+          <Card title="Python" lang={lang} path="python" />
+          <Card title="Go" lang={lang} path="golang" />
+          <Card title="Solidity" lang={lang} path="solidity" />
+        </div>
+      </div>
+    </div>
+    <style is:global>
+      .font-fredoka {
+        font-family: "Fredoka Variable", sans-serif;
+      }
+      .font-ibm-plex {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+      }
+    </style>
+  </body>
+</html>

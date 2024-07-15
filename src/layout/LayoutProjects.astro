@@ -1,0 +1,46 @@
+---
+import "@fontsource-variable/fredoka";
+import "@fontsource/ibm-plex-sans-arabic";
+import Navbar from "../components/Navbar.astro";
+import { ViewTransitions } from "astro:transitions";
+
+const classes = [
+  // "sm:px-5 md:px-0 lg:px-10",
+  "min-h-screen",
+  "bg-black",
+  "text-white",
+  "font-extralight",
+  "flex",
+  "flex-col",
+  "justify-center",
+  "items-center",
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Javier Guajardo</title>
+    <ViewTransitions />
+  </head>
+  <body>
+    <div class:list={classes}>
+      <!-- <div class="lg:px-0 px-10 pb-20"> -->
+      <div class="max-w-6xl w-full lg:px-0 md:px-5 px-10 pb-20">
+        <Navbar showLangs={false} lang="es" />
+        <slot />
+      </div>
+    </div>
+    <style is:global>
+      .font-fredoka {
+        font-family: "Fredoka Variable", sans-serif;
+      }
+      .font-ibm-plex {
+        font-family: "IBM Plex Sans Arabic", sans-serif;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+---
+import "@fontsource-variable/fredoka";
+// import profile from "../profile";
+import GitStats from "./GitStats.astro";
+
+interface Props {
+  path: string;
+  title: string;
+  lang?: string;
+  image?: string;
+  forks: number;
+  stars: number;
+  description: string;
+}
+
+const {
+  image,
+  lang = "en",
+  path,
+  title,
+  forks = 0,
+  stars = 0,
+  description,
+} = Astro.props;
+---
+
+<div
+  class="lg:h-72 border border-orange-600/40 rounded-ee-xl rounded-ss-xl p-5 hover:border-orange-600 hover:border-[1px] bg-gray-900/60 transition-colors duration-600 w-full"
+>
+  <div
+    class="border border-orange-600/30 rounded-2xl p-5 hover:border-orange-600 hover:border bg-gray-900/60 transition-colors duration-300"
+  >
+    <!-- <div
+  class="lg:h-72 border border-orange-600/40 rounded-2xl p-5 hover:border-orange-600 hover:border-[1px] bg-gray-900/60 transition-colors duration-600 w-full"
+> -->
+    <div class="flex flex-col space-y-2">
+      <div
+        class="flex lg:flex-row flex-col lg:items-start items-center justify-center"
+      >
+        <div class="w-2/4">
+          <div class="">
+            <img src={image} class="rounded-2xl w-full h-52" />
+          </div>
+          <div class="my-3 lg:hidden block">
+            <GitStats forks={forks} stars={stars} />
+          </div>
+        </div>
+        <div class="font-bold text-xl flex flex-col justify-center px-5 w-full">
+          <div class="py-2 font-fredoka font-normal flex flex-col gap-2">
+            <div class="w-full">
+              {title}
+            </div>
+            <div class="text-sm font-light text-gray-400">Jul 12, 2022</div>
+          </div>
+          <div class="font-fredoka font-light text-justify">
+            {description}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex lg:justify-between justify-end px-5">
+      <div class="w-1/3 hidden lg:block">
+        <GitStats forks={forks} stars={stars} />
+      </div>
+      <div
+        class="text-right hover:text-white px-2 rounded-lg text-orange-600 hover:bg-orange-600 flex items-center"
+      >
+        <a href={path}>View on GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <style is:global>
+    .font-fredoka {
+      font-family: "Fredoka Variable", sans-serif;
+    }
+  </style>
+</div>

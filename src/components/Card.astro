@@ -1,0 +1,44 @@
+---
+import "@fontsource-variable/fredoka";
+import profile from "../profile";
+
+interface Props {
+  path: string;
+  title: string;
+  lang?: string;
+  showIcon?: boolean;
+}
+
+const { lang = "en", path, title, showIcon = true } = Astro.props;
+---
+
+<div
+  class="border border-orange-600/30 rounded-ee-xl rounded-ss-xl p-5 hover:border-orange-600 hover:border bg-gray-900/60 transition-colors duration-300"
+>
+  <!-- <div
+    class="border border-orange-600/30 rounded-2xl p-5 hover:border-orange-600 hover:border bg-gray-900/60 transition-colors duration-300"
+  > -->
+  <div class="flex flex-col space-y-2">
+    <div class="font-bold text-xl flex gap-2 items-center">
+      <div
+        class={`h-8 w-8 ${!showIcon && "hidden"} rounded-md`}
+        style={`background: url(/assets/${path}.svg)`}
+      >
+      </div>
+      <div class="py-2 font-fredoka font-normal">
+        {title}
+      </div>
+    </div>
+    <div class="font-fredoka text-justify h-28">
+      {profile.technologies[lang][path]}
+    </div>
+    <div class="text-right text-orange-600">
+      <a href={path}>See projects&nbsp;&nbsp;→</a>
+    </div>
+  </div>
+</div>
+<style is:global>
+  .font-fredoka {
+    font-family: "Fredoka Variable", sans-serif;
+  }
+</style>

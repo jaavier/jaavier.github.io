@@ -1,0 +1,50 @@
+---
+import CardProjectBackend from "../components/CardProjectBackend.astro";
+import LayoutProjects from "../layout/LayoutProjects.astro";
+import { Icon } from "astro-icon/components";
+import projects from "../profile/projects";
+import Tabs from "./Tabs";
+import supportedLanguages from "../config";
+
+function returnValidLang(): string {
+  const lang = navigator.language.split("-")[0];
+  if (supportedLanguages.includes(lang)) return lang;
+  else return "en";
+}
+
+const lang = returnValidLang();
+---
+
+<LayoutProjects>
+  <div class="mt-32 flex flex-col justify-center gap-5">
+    <a
+      href="/"
+      class="flex gap-2 items-center text-orange-600 border-b border-orange-600 w-fit"
+    >
+      <div><Icon name="mdi:arrow-left" /></div>
+      <div>Home</div>
+    </a>
+    <div class="flex items-center gap-3 mt-5">
+      <div
+        style={`background: url(/assets/golang.svg) no-repeat center; background-sizen:cover; background-position:center center; height: 30px; width:30px`}
+      >
+      </div>
+      <div class="text-3xl font-fredoka">Go</div>
+    </div>
+  </div>
+  <!-- <Tabs projects={projects["golang"]} lang={lang} client:visible /> -->
+  <div class="grid lg:grid-cols-1 mt-2 gap-5 pb-5">
+    {
+      projects["golang"] &&
+        projects["golang"].map((project: Project) => (
+          <CardProjectBackend {...project} lang={lang} />
+        ))
+    }
+  </div>
+</LayoutProjects>
+
+<style>
+  body {
+    /* font-family: "Fredoka Variable", sans-serif; */
+  }
+</style>

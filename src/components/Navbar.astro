@@ -1,0 +1,80 @@
+---
+import profile from "../profile";
+import Button from "./Button.astro";
+
+interface Props {
+  lang: string;
+  showLangs?: boolean;
+}
+
+const { lang = "en", showLangs } = Astro.props;
+---
+
+<div
+  class="fixed border-white/20 flex items-center gap-3 font-fredoka z-10 bg-black w-full py-5 left-0 px-10 sm:px-10"
+  id="navbar"
+>
+  <div class="max-w-6xl flex justify-between items-center w-full mx-auto">
+    <div class="flex items-center gap-3 w-1/2">
+      <div
+        class="md:w-14 md:h-14 rounded-full lg:block hidden"
+        style={`background: url(/assets/me.png); width:60px; height:60px;background-repeat:no-repeat;
+background-position: center center;background-size: cover`}
+      >
+      </div>
+      <div class="font-light lg:text-xl flex-1">
+        <div>Javier Guajardo</div>
+        <div class="text-sm ml-1 font-semibold font-ibm-plex">
+          {profile.country[lang]}
+        </div>
+      </div>
+    </div>
+    <div class="font-light lg:text-xl text-sm hidden gap-3" id="social-navbar">
+      <Button href="https://github.com/jaavier" text="GitHub" icon="github" />
+      <Button
+        href="https://www.linkedin.com/in/javier-gj/"
+        text="LinkedIn"
+        icon="linkedin"
+      />
+    </div>
+  </div>
+</div>
+<script>
+  // Definimos los breakpoints y los umbrales de scroll correspondientes
+  const breakpoints = [
+    { maxWidth: 425, threshold: 400 }, // Mobile
+    { maxWidth: 822, threshold: 355 }, // Tablet
+    { maxWidth: Infinity, threshold: 185 }, // Desktop
+  ];
+
+  function getScrollThreshold() {
+    const windowWidth = window.innerWidth;
+    //@ts-ignore
+    const { threshold } = breakpoints.find((bp) => windowWidth <= bp.maxWidth);
+    return threshold;
+  }
+
+  function handleScroll() {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    const social = document.getElementById("social-navbar");
+    const navbar = document.getElementById("navbar");
+    const socialText = document.querySelectorAll("#social-text");
+    const threshold = getScrollThreshold();
+
+    if (y > threshold) {
+      social?.classList.remove("hidden");
+      if (threshold === 400)
+        socialText.forEach((element) => element?.classList.add("hidden"));
+      social?.classList.add("flex");
+      navbar?.classList.add("border-b");
+    } else {
+      navbar?.classList.remove("border-b");
+      social?.classList.remove("flex");
+      social?.classList.add("hidden");
+    }
+  }
+
+  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("resize", handleScroll);
+  handleScroll();
+</script>
