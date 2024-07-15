@@ -6,7 +6,7 @@ import projects from "../profile/projects";
 import supportedLanguages from "../config";
 
 function returnValidLang(): string {
-  const lang = navigator.language.split("-")[0];
+  const lang = "en";
   if (supportedLanguages.includes(lang)) return lang;
   else return "en";
 }
