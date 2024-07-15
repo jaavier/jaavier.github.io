@@ -11,7 +11,7 @@ const CardReactSeeAll: React.FC<CardProps> = ({
   url,
 }) => {
   return (
-    <div className="font-fredoka font-light h-full border border-orange-600/30 rounded-2xl p-5 hover:border-orange-600 hover:border bg-gray-900/60 transition-colors duration-300 flex items-center justify-center text-2xl">
+    <div className="font-fredoka font-light h-full border border-orange-600/30 rounded-ee-xl rounded-ss-xl p-5 hover:border-orange-600 hover:border bg-gray-900/60 transition-colors duration-300 flex items-center justify-center text-2xl">
       <a href={url}>See all {language} projects</a>
     </div>
   );
